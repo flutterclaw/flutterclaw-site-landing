@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlutterClaw — OpenClaw gateway on your phone</title>
+  <meta name="description" content="The OpenClaw gateway ported to mobile. Standalone AI assistant for Android and iOS: full runtime, channels, and agents on your device." />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="logo-link" aria-label="FlutterClaw home">
+        <img src="assets/logo.png" alt="FlutterClaw mascot" class="logo-img" width="48" height="48" />
+        <span class="logo-text">FlutterClaw</span>
+      </a>
+      <nav class="nav">
+        <a href="https://github.com/flutterclaw/flutterclaw" class="btn btn-ghost">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <img src="assets/logo.png" alt="" class="hero-logo" width="120" height="120" />
+        <h1 class="hero-title">OpenClaw on your phone</h1>
+        <p class="hero-subtitle">
+          The OpenClaw gateway ported to mobile: it runs entirely on your device (Android and iOS).
+          Same gateway and agent as OpenClaw—not a thin client. The full runtime, channels,
+          tools, and agent orchestration run on the device.
+        </p>
+        <p class="hero-tagline">Standalone AI assistant for Android and iOS — the full OpenClaw gateway and agent runtime, running entirely on your phone.</p>
+        <div class="hero-cta">
+          <a href="https://github.com/flutterclaw/flutterclaw" class="btn btn-primary">View on GitHub</a>
+        </div>
+        <p class="hero-based">Mobile port of the <a href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a> gateway. Not an official OpenClaw project.</p>
+      </div>
+    </section>
+
+    <section class="screenshots" id="screenshots">
+      <div class="section-inner">
+        <h2 class="section-title">The app in action</h2>
+        <p class="section-lead">Chat, agents, channels, models, and ClawHub — all on your phone.</p>
+        <div class="screenshot-grid">
+          <figure class="screenshot-item">
+            <img src="assets/screenshot-chat.png" alt="FlutterClaw chat with Spark: daily step reminder configured" loading="lazy" />
+            <figcaption>Chat</figcaption>
+          </figure>
+          <figure class="screenshot-item">
+            <img src="assets/screenshot-channels.png" alt="Channels & Gateway: gateway status, Chat, Telegram, Discord" loading="lazy" />
+            <figcaption>Channels & Gateway</figcaption>
+          </figure>
+          <figure class="screenshot-item">
+            <img src="assets/screenshot-agents-expanded.png" alt="Agents: Spark, workspace files, active sessions" loading="lazy" />
+            <figcaption>Agents</figcaption>
+          </figure>
+          <figure class="screenshot-item">
+            <img src="assets/screenshot-agents-sessions.png" alt="Active sessions and workspace files" loading="lazy" />
+            <figcaption>Sessions</figcaption>
+          </figure>
+          <figure class="screenshot-item">
+            <img src="assets/screenshot-agents-skills.png" alt="Skills: web-search, memory-manager, file-manager, GIF" loading="lazy" />
+            <figcaption>Skills</figcaption>
+          </figure>
+          <figure class="screenshot-item">
+            <img src="assets/screenshot-clawhub.png" alt="ClawHub Skills: browse and install skills" loading="lazy" />
+            <figcaption>ClawHub Skills</figcaption>
+          </figure>
+          <figure class="screenshot-item">
+            <img src="assets/screenshot-add-model.png" alt="Add model: OpenRouter, OpenAI, Anthropic, Ollama, and more" loading="lazy" />
+            <figcaption>Add model</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="section-inner">
+        <h2 class="section-title">What FlutterClaw does</h2>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>24/7 gateway on device</h3>
+            <p>Background service (Android foreground, iOS background). Same WebSocket protocol and config format as OpenClaw. Embedded localhost server for external tools.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Multi-provider LLM</h3>
+            <p>OpenAI, Anthropic, Groq, DeepSeek, Gemini, Zhipu, OpenRouter, Volcengine, Ollama, Qwen. OpenRouter stealth models (Healer Alpha, Hunter Alpha). Streaming responses and secure API key storage.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Agents & ClawHub</h3>
+            <p>Create, switch, and delete agents with isolated workspaces. Profiles with name, emoji, model, and system prompt. Subagents, cross-session messaging, and ClawHub skills.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Channels</h3>
+            <p>Telegram (long polling), Discord (WebSocket), built-in Chat. Per-channel DM policies and slash commands across adapters.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Device integration</h3>
+            <p>Health (steps, sleep, heart rate), camera, location, contacts, calendar, clipboard, notifications and reminders, background playback, iOS Shortcuts and Live Activities.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Scheduling</h3>
+            <p>Heartbeat for periodic tasks from HEARTBEAT.md. Cron (5-field expressions), intervals, and one-shot scheduled tasks.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-start" id="quick-start">
+      <div class="section-inner">
+        <h2 class="section-title">Quick Start</h2>
+        <p class="section-lead">Get the app running in three steps. No magic, just copy-paste.</p>
+        <div class="quick-start-cards">
+          <div class="quick-step">
+            <span class="quick-step-num" aria-hidden="true">1</span>
+            <h3 class="quick-step-title">Check Flutter</h3>
+            <p class="quick-step-desc">Install Flutter 3.22+ and run:</p>
+            <pre class="quick-step-code"><code>flutter doctor -v</code></pre>
+          </div>
+          <div class="quick-step">
+            <span class="quick-step-num" aria-hidden="true">2</span>
+            <h3 class="quick-step-title">Clone & go</h3>
+            <p class="quick-step-desc">Grab the repo and jump in:</p>
+            <pre class="quick-step-code"><code>git clone https://github.com/flutterclaw/flutterclaw.git
+cd flutterclaw</code></pre>
+          </div>
+          <div class="quick-step">
+            <span class="quick-step-num" aria-hidden="true">3</span>
+            <h3 class="quick-step-title">Run it</h3>
+            <p class="quick-step-desc">Install deps and launch (device or emulator):</p>
+            <pre class="quick-step-code"><code>flutter pub get
+flutter run</code></pre>
+          </div>
+        </div>
+        <p class="quick-start-cta">
+          <a href="https://github.com/flutterclaw/flutterclaw" class="btn btn-primary">Open on GitHub</a>
+        </p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a href="https://github.com/flutterclaw/flutterclaw" class="footer-link">GitHub</a>
+        <span class="footer-sep">·</span>
+        <a href="https://openclaw.ai" class="footer-link" target="_blank" rel="noopener">OpenClaw</a>
+        <span class="footer-sep">·</span>
+        <span class="footer-license">MIT</span>
+      </div>
+    </footer>
+  </main>
+  <!-- Firebase Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAWXmRVCFNFQBqK4Z3ZGJKKQHbrc6C4yB8",
+      authDomain: "flutterclaw-c226e.firebaseapp.com",
+      projectId: "flutterclaw-c226e",
+      storageBucket: "flutterclaw-c226e.firebasestorage.app",
+      messagingSenderId: "161783475403",
+      appId: "1:161783475403:web:4c1e884c7ff5f71c51bf4e",
+      measurementId: "G-FPJVS11VK3"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+</body>
+</html>
