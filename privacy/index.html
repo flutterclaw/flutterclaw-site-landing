@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — FlutterClaw</title>
+  <meta name="description" content="Privacy Policy for FlutterClaw, the OpenClaw gateway on your phone." />
+  <link rel="icon" href="../assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo-link" aria-label="FlutterClaw home">
+        <img src="../assets/logo.png" alt="FlutterClaw mascot" class="logo-img" width="48" height="48" />
+        <span class="logo-text">FlutterClaw</span>
+      </a>
+      <nav class="nav">
+        <a href="https://github.com/flutterclaw/flutterclaw" class="btn btn-ghost">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="privacy-page">
+      <div class="section-inner privacy-content">
+        <h1 class="section-title">Privacy Policy</h1>
+        <p class="privacy-updated">Last updated: March 18, 2026</p>
+
+        <h2>Introduction</h2>
+        <p>FlutterClaw ("we", "us", or "our") respects your privacy. This Privacy Policy explains how we collect, use, and protect information when you visit our website <strong>flutterclaw.ai</strong> (the "Site").</p>
+
+        <h2>Information We Collect</h2>
+        <p>We do not collect personal information such as your name, email address, or phone number through this Site. The only data we collect is anonymous usage analytics through Firebase Analytics, which may include:</p>
+        <ul>
+          <li>Pages visited and time spent on the Site</li>
+          <li>Referring website or source</li>
+          <li>Browser type and device information</li>
+          <li>Approximate geographic location (country/region level)</li>
+        </ul>
+
+        <h2>How We Use Information</h2>
+        <p>The anonymous analytics data we collect is used solely to:</p>
+        <ul>
+          <li>Understand how visitors interact with the Site</li>
+          <li>Improve the content and user experience of the Site</li>
+          <li>Monitor overall Site traffic and usage patterns</li>
+        </ul>
+
+        <h2>Third-Party Services</h2>
+        <p>We use <strong>Firebase Analytics</strong> (provided by Google) to collect anonymous usage data. Firebase Analytics may use cookies or similar technologies to gather this information. For more details on how Google handles data, please review the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</p>
+
+        <h2>The FlutterClaw App</h2>
+        <p>FlutterClaw is an open-source application that runs entirely on your device. The app itself does not send any data to our servers. Any API keys, configuration, or personal data you enter in the app remain stored locally on your device. Third-party services you connect (such as LLM providers) are subject to their own privacy policies.</p>
+
+        <h2>Cookies</h2>
+        <p>This Site may use cookies set by Firebase Analytics for usage tracking purposes. You can disable cookies through your browser settings at any time.</p>
+
+        <h2>Data Security</h2>
+        <p>We take reasonable measures to protect the information collected through the Site. However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security.</p>
+
+        <h2>Children's Privacy</h2>
+        <p>This Site is not directed at children under the age of 13. We do not knowingly collect personal information from children.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Last updated" date.</p>
+
+        <h2>Contact</h2>
+        <p>If you have questions about this Privacy Policy, you can reach us through our <a href="https://github.com/flutterclaw/flutterclaw" target="_blank" rel="noopener">GitHub repository</a>.</p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a href="https://github.com/flutterclaw/flutterclaw" class="footer-link">GitHub</a>
+        <span class="footer-sep">&middot;</span>
+        <a href="https://openclaw.ai" class="footer-link" target="_blank" rel="noopener">OpenClaw</a>
+        <span class="footer-sep">&middot;</span>
+        <a href="/privacy" class="footer-link">Privacy</a>
+        <span class="footer-sep">&middot;</span>
+        <span class="footer-license">MIT</span>
+      </div>
+    </footer>
+  </main>
+  <!-- Firebase Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAWXmRVCFNFQBqK4Z3ZGJKKQHbrc6C4yB8",
+      authDomain: "flutterclaw-c226e.firebaseapp.com",
+      projectId: "flutterclaw-c226e",
+      storageBucket: "flutterclaw-c226e.firebasestorage.app",
+      messagingSenderId: "161783475403",
+      appId: "1:161783475403:web:4c1e884c7ff5f71c51bf4e",
+      measurementId: "G-FPJVS11VK3"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+</body>
+</html>

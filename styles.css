@@ -412,6 +412,41 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
   color: #fff !important;
 }
 
+/* Privacy page */
+.privacy-page {
+  padding: var(--space-3xl) 0;
+}
+.privacy-content {
+  max-width: var(--max-width);
+}
+.privacy-updated {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+  margin: 0 0 var(--space-2xl);
+}
+.privacy-content h2 {
+  font-size: var(--text-h3);
+  font-weight: 700;
+  letter-spacing: var(--letter-tight);
+  margin: var(--space-xl) 0 var(--space-sm);
+  color: var(--color-text);
+}
+.privacy-content p {
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-sm);
+}
+.privacy-content ul {
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-sm);
+  padding-left: var(--space-lg);
+}
+.privacy-content li {
+  margin-bottom: var(--space-xs);
+}
+
 /* Footer */
 .site-footer {
   padding: var(--space-xl) var(--space-lg);
