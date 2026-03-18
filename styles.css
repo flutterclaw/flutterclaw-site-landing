@@ -224,6 +224,51 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .hero-based a { color: var(--color-text-muted); text-decoration: underline; text-underline-offset: 2px; }
 .hero-based a:hover { color: var(--color-text); }
 
+/* Beta open CTA */
+.beta-join {
+  text-align: center;
+  margin: 0 0 var(--space-lg);
+}
+.beta-join-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(255, 51, 102, 0.12);
+  border: 1px solid rgba(255, 51, 102, 0.35);
+  color: #ffd1dd;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-xs);
+}
+.beta-join-text {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-md);
+  line-height: var(--line-height-relaxed);
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.beta-join-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* Make GitHub less “CTA-like” under the beta buttons */
+.hero-github-link {
+  display: inline-block;
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.hero-github-link:hover { color: var(--color-text); }
+
 /* Section common */
 .section-inner {
   max-width: var(--max-width-wide);
@@ -500,5 +545,14 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
   }
   .quick-step-code code {
     white-space: pre;
+  }
+
+  .beta-join-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-xs);
+  }
+  .beta-join-buttons .btn {
+    width: 100%;
   }
 }
