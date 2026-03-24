@@ -35,10 +35,10 @@
         <p class="hero-tagline">Standalone AI assistant for Android and iOS — the full OpenClaw gateway and agent runtime, running entirely on your phone.</p>
         <div class="beta-join">
           <div class="beta-join-badge">Open beta</div>
-          <p class="beta-join-text">The open beta is live. Join from iOS or Android.</p>
+          <p class="beta-join-text">The open beta is live on iOS. On Android, request access via Google Play closed testing below.</p>
           <div class="beta-join-buttons">
             <a href="https://testflight.apple.com/join/C7JbGgdt" class="btn btn-primary" target="_blank" rel="noopener">Join on iOS</a>
-            <a href="https://github.com/flutterclaw/flutterclaw/releases/latest" class="btn btn-ghost" target="_blank" rel="noopener">Download APK (Android)</a>
+            <a href="#closed-beta" class="btn btn-ghost">Request Play closed test</a>
           </div>
         </div>
         <div class="hero-cta">
@@ -79,10 +79,24 @@
             Request access
           </button>
           <p class="closed-beta-hint" id="closed-beta-privacy-hint">
-            You won’t get a confirmation email from this form. If you’re invited, you’ll see the app in Play / receive a Play opt-in link, depending on how we set up the test track.
+            You won’t get a confirmation email from this form. Once we add you to the testers list, use the links below with your Google account.
           </p>
           <p class="closed-beta-status" id="closed-beta-status" role="status" aria-live="polite" aria-atomic="true"></p>
         </form>
+        <div class="closed-beta-after-approval" id="closed-beta-after-approval">
+          <p class="closed-beta-after-title">After you’re approved on the closed test</p>
+          <p class="closed-beta-after-intro">Use the <strong>same Google account</strong> you submit in the form. You can install or open the test build using:</p>
+          <ul class="closed-beta-link-list">
+            <li>
+              <a href="https://play.google.com/store/apps/details?id=ai.flutterclaw.flutterclaw" target="_blank" rel="noopener">Google Play — app page</a>
+              <span class="closed-beta-link-note">(<code>id=ai.flutterclaw.flutterclaw</code>)</span>
+            </li>
+            <li>
+              <a href="https://play.google.com/apps/testing/ai.flutterclaw.flutterclaw" target="_blank" rel="noopener">Play testing link (web opt-in)</a>
+              <span class="closed-beta-link-note">(sign in with your Google account)</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -241,15 +255,32 @@ flutter run</code></pre>
         if (!consent.checked) return;
         submitBtn.disabled = true;
         try {
-          await db.collection(collectionName).add({ email: normalized });
+          var docRef = db.collection(collectionName).doc(normalized);
+          await docRef.set({ email: normalized });
           setStatus('Thanks — you’re on the list. We’ll use this email for Play closed testing only, as described in our Privacy Policy.');
           form.reset();
         } catch (err) {
           console.error(err);
-          setStatus('Something went wrong. Please try again in a moment.', true);
+          var code = err && err.code;
+          if (code === 'permission-denied') {
+            setStatus('This email is already registered.', true);
+          } else {
+            setStatus('Something went wrong. Please try again in a moment.', true);
+          }
         } finally {
           submitBtn.disabled = false;
         }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var ua = navigator.userAgent || '';
+      if (!/Android/i.test(ua) || /Windows Phone/i.test(ua)) return;
+      var el = document.getElementById('closed-beta');
+      if (!el) return;
+      window.requestAnimationFrame(function () {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     })();
   </script>

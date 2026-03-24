@@ -1,13 +1,15 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Google Play closed-testing signups from flutterclaw.ai (public create only; no reads).
+    // Google Play closed-testing signups (public create only if doc id is new; doc id must equal email).
     match /playClosedBetaSignups/{docId} {
-      allow create: if request.resource.data.keys().hasOnly(['email'])
+      allow create: if !exists(/databases/$(database)/documents/playClosedBetaSignups/$(docId))
+        && docId == request.resource.data.email
+        && request.resource.data.keys().hasOnly(['email'])
         && request.resource.data.email is string
         && request.resource.data.email.size() >= 5
         && request.resource.data.email.size() <= 320
-        && request.resource.data.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$');
+        && request.resource.data.email.matches('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$');
       allow read, update, delete: if false;
     }
 
