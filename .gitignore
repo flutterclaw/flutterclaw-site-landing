@@ -3,3 +3,7 @@ Thumbs.db
 *.log
 .idea
 .vscode
+node_modules/
+*-firebase-adminsdk-*.json
+serviceAccount*.json
+play-closed-beta-emails.csv

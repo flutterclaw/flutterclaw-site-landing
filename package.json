@@ -1,0 +1,12 @@
+{
+  "name": "flutterclaw-site-landing",
+  "private": true,
+  "type": "module",
+  "description": "Static landing; optional tooling for Firestore export",
+  "scripts": {
+    "export-play-beta": "node scripts/export-play-beta-signups.mjs"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}

@@ -16,6 +16,7 @@
         <span class="logo-text">FlutterClaw</span>
       </a>
       <nav class="nav">
+        <a href="#closed-beta" class="nav-anchor">Play closed beta</a>
         <a href="https://github.com/flutterclaw/flutterclaw" class="btn btn-ghost">GitHub</a>
       </nav>
     </div>
@@ -44,6 +45,44 @@
           <a href="https://github.com/flutterclaw/flutterclaw" class="hero-github-link" target="_blank" rel="noopener">View on GitHub</a>
         </div>
         <p class="hero-based">Mobile port of the <a href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a> gateway. Not an official OpenClaw project.</p>
+      </div>
+    </section>
+
+    <section class="closed-beta" id="closed-beta" aria-labelledby="closed-beta-title">
+      <div class="section-inner closed-beta-inner">
+        <h2 class="section-title" id="closed-beta-title">Google Play closed testing</h2>
+        <p class="section-lead closed-beta-lead">
+          Want access on Google Play? Leave your Google account email (the one you use on Android / Play Store).
+          We’ll use it only to add you to the closed testing list when spots are available.
+        </p>
+        <form class="closed-beta-form" id="closed-beta-form" novalidate>
+          <div class="closed-beta-field">
+            <label class="closed-beta-label" for="closed-beta-email">Email</label>
+            <input
+              class="closed-beta-input"
+              type="email"
+              id="closed-beta-email"
+              name="email"
+              autocomplete="email"
+              inputmode="email"
+              required
+              maxlength="320"
+              placeholder="you@gmail.com"
+              aria-describedby="closed-beta-privacy-hint closed-beta-status"
+            />
+          </div>
+          <label class="closed-beta-consent">
+            <input type="checkbox" id="closed-beta-consent" name="consent" required />
+            <span>I agree to the processing of my email as described in the <a href="/privacy">Privacy Policy</a>.</span>
+          </label>
+          <button type="submit" class="btn btn-primary closed-beta-submit" id="closed-beta-submit">
+            Request access
+          </button>
+          <p class="closed-beta-hint" id="closed-beta-privacy-hint">
+            You won’t get a confirmation email from this form. If you’re invited, you’ll see the app in Play / receive a Play opt-in link, depending on how we set up the test track.
+          </p>
+          <p class="closed-beta-status" id="closed-beta-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        </form>
       </div>
     </section>
 
@@ -160,9 +199,10 @@ flutter run</code></pre>
       </div>
     </footer>
   </main>
-  <!-- Firebase Analytics -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyAWXmRVCFNFQBqK4Z3ZGJKKQHbrc6C4yB8",
@@ -175,6 +215,43 @@ flutter run</code></pre>
     };
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
+  </script>
+  <script>
+    (function () {
+      var form = document.getElementById('closed-beta-form');
+      if (!form) return;
+      var emailInput = document.getElementById('closed-beta-email');
+      var consent = document.getElementById('closed-beta-consent');
+      var submitBtn = document.getElementById('closed-beta-submit');
+      var statusEl = document.getElementById('closed-beta-status');
+      var db = firebase.firestore();
+      var collectionName = 'playClosedBetaSignups';
+
+      function setStatus(msg, isError) {
+        statusEl.textContent = msg || '';
+        statusEl.classList.toggle('closed-beta-status--error', !!isError);
+      }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        setStatus('');
+        if (!form.reportValidity()) return;
+        var raw = emailInput.value.trim();
+        var normalized = raw.toLowerCase();
+        if (!consent.checked) return;
+        submitBtn.disabled = true;
+        try {
+          await db.collection(collectionName).add({ email: normalized });
+          setStatus('Thanks — you’re on the list. We’ll use this email for Play closed testing only, as described in our Privacy Policy.');
+          form.reset();
+        } catch (err) {
+          console.error(err);
+          setStatus('Something went wrong. Please try again in a moment.', true);
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
