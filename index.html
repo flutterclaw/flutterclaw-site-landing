@@ -16,7 +16,7 @@
         <span class="logo-text">FlutterClaw</span>
       </a>
       <nav class="nav">
-        <a href="#closed-beta" class="nav-anchor">Play closed beta</a>
+        <a href="#android-beta" class="nav-anchor">Android</a>
         <a href="https://github.com/flutterclaw/flutterclaw" class="btn btn-ghost">GitHub</a>
       </nav>
     </div>
@@ -34,11 +34,11 @@
         </p>
         <p class="hero-tagline">Standalone AI assistant for Android and iOS — the full OpenClaw gateway and agent runtime, running entirely on your phone.</p>
         <div class="beta-join">
-          <div class="beta-join-badge">Open beta</div>
-          <p class="beta-join-text">The open beta is live on iOS. On Android, request access via Google Play closed testing below.</p>
+          <div class="beta-join-badge">Beta</div>
+          <p class="beta-join-text">iOS via TestFlight. Android via Google Play — register the Google account you use on your phone.</p>
           <div class="beta-join-buttons">
             <a href="https://testflight.apple.com/join/C7JbGgdt" class="btn btn-primary" target="_blank" rel="noopener">Join on iOS</a>
-            <a href="#closed-beta" class="btn btn-ghost">Request Play closed test</a>
+            <a href="#android-beta" class="btn btn-ghost">Join on Android</a>
           </div>
         </div>
         <div class="hero-cta">
@@ -48,16 +48,15 @@
       </div>
     </section>
 
-    <section class="closed-beta" id="closed-beta" aria-labelledby="closed-beta-title">
+    <section class="closed-beta" id="android-beta" aria-labelledby="android-beta-title">
       <div class="section-inner closed-beta-inner">
-        <h2 class="section-title" id="closed-beta-title">Google Play closed testing</h2>
+        <h2 class="section-title" id="android-beta-title">Android beta</h2>
         <p class="section-lead closed-beta-lead">
-          Want access on Google Play? Leave your Google account email (the one you use on Android / Play Store).
-          We’ll use it only to add you to the closed testing list when spots are available.
+          Enter the Google account you use on Play Store. We’ll invite you to the beta when we can.
         </p>
         <form class="closed-beta-form" id="closed-beta-form" novalidate>
           <div class="closed-beta-field">
-            <label class="closed-beta-label" for="closed-beta-email">Email</label>
+            <label class="closed-beta-label" for="closed-beta-email">Google account email</label>
             <input
               class="closed-beta-input"
               type="email"
@@ -76,26 +75,29 @@
             <span>I agree to the processing of my email as described in the <a href="/privacy">Privacy Policy</a>.</span>
           </label>
           <button type="submit" class="btn btn-primary closed-beta-submit" id="closed-beta-submit">
-            Request access
+            Register for Android beta
           </button>
           <p class="closed-beta-hint" id="closed-beta-privacy-hint">
-            You won’t get a confirmation email from this form. Once we add you to the testers list, use the links below with your Google account.
+            No confirmation email from this page. After you’re on the tester list, use the same Google account with the buttons below.
           </p>
           <p class="closed-beta-status" id="closed-beta-status" role="status" aria-live="polite" aria-atomic="true"></p>
         </form>
-        <div class="closed-beta-after-approval" id="closed-beta-after-approval">
-          <p class="closed-beta-after-title">After you’re approved on the closed test</p>
-          <p class="closed-beta-after-intro">Use the <strong>same Google account</strong> you submit in the form. You can install or open the test build using:</p>
-          <ul class="closed-beta-link-list">
-            <li>
-              <a href="https://play.google.com/store/apps/details?id=ai.flutterclaw.flutterclaw" target="_blank" rel="noopener">Google Play — app page</a>
-              <span class="closed-beta-link-note">(<code>id=ai.flutterclaw.flutterclaw</code>)</span>
-            </li>
-            <li>
-              <a href="https://play.google.com/apps/testing/ai.flutterclaw.flutterclaw" target="_blank" rel="noopener">Play testing link (web opt-in)</a>
-              <span class="closed-beta-link-note">(sign in with your Google account)</span>
-            </li>
-          </ul>
+        <div class="closed-beta-next-steps">
+          <p class="closed-beta-next-label">After you’re on the tester list</p>
+          <div class="closed-beta-next-buttons">
+            <a
+              class="btn btn-ghost closed-beta-next-btn"
+              href="https://play.google.com/store/apps/details?id=ai.flutterclaw.flutterclaw"
+              target="_blank"
+              rel="noopener"
+            >Open in Play Store</a>
+            <a
+              class="btn btn-ghost closed-beta-next-btn"
+              href="https://play.google.com/apps/testing/ai.flutterclaw.flutterclaw"
+              target="_blank"
+              rel="noopener"
+            >Tester opt-in (web)</a>
+          </div>
         </div>
       </div>
     </section>
@@ -257,7 +259,7 @@ flutter run</code></pre>
         try {
           var docRef = db.collection(collectionName).doc(normalized);
           await docRef.set({ email: normalized });
-          setStatus('Thanks — you’re on the list. We’ll use this email for Play closed testing only, as described in our Privacy Policy.');
+          setStatus('Thanks — you’re on the list. We’ll use this email for the Android beta only, as described in our Privacy Policy.');
           form.reset();
         } catch (err) {
           console.error(err);
@@ -275,12 +277,28 @@ flutter run</code></pre>
   </script>
   <script>
     (function () {
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href="#android-beta"]');
+        if (!a) return;
+        window.setTimeout(function () {
+          var input = document.getElementById('closed-beta-email');
+          if (input) input.focus({ preventScroll: true });
+        }, 500);
+      });
+    })();
+  </script>
+  <script>
+    (function () {
       var ua = navigator.userAgent || '';
       if (!/Android/i.test(ua) || /Windows Phone/i.test(ua)) return;
-      var el = document.getElementById('closed-beta');
+      var el = document.getElementById('android-beta');
       if (!el) return;
       window.requestAnimationFrame(function () {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.setTimeout(function () {
+          var input = document.getElementById('closed-beta-email');
+          if (input) input.focus({ preventScroll: true });
+        }, 450);
       });
     })();
   </script>

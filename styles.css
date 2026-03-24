@@ -363,48 +363,42 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
   color: #fda4af;
 }
 
-.closed-beta-after-approval {
-  max-width: 26rem;
+.closed-beta-next-steps {
+  max-width: 22rem;
   margin: var(--space-lg) auto 0;
-  text-align: left;
-  padding: var(--space-md) var(--space-lg);
-  background: rgba(18, 18, 22, 0.6);
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+  background: var(--color-bg-card);
   border: 1px solid var(--color-card-border);
   border-radius: var(--radius);
+  text-align: center;
 }
-.closed-beta-after-title {
-  font-size: var(--text-h3);
-  font-weight: 700;
-  margin: 0 0 var(--space-sm);
-  color: var(--color-text);
-}
-.closed-beta-after-intro {
+.closed-beta-next-label {
   font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-md);
   line-height: var(--line-height-relaxed);
-  color: var(--color-text-muted);
-  margin: 0 0 var(--space-sm);
 }
-.closed-beta-link-list {
-  margin: 0;
-  padding-left: 1.15rem;
-  font-size: var(--text-small);
-  line-height: var(--line-height-relaxed);
-  color: var(--color-text-muted);
+.closed-beta-next-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: stretch;
 }
-.closed-beta-link-list li { margin-bottom: var(--space-sm); }
-.closed-beta-link-list li:last-child { margin-bottom: 0; }
-.closed-beta-link-list a { font-weight: 600; }
-.closed-beta-link-note {
-  display: block;
-  margin-top: 0.2rem;
-  font-size: 0.8125rem;
-  opacity: 0.85;
+.closed-beta-next-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
 }
-.closed-beta-link-note code {
-  font-family: var(--font-mono);
-  font-size: 0.75em;
-  color: var(--color-text-muted);
-  word-break: break-all;
+@media (min-width: 520px) {
+  .closed-beta-next-buttons {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .closed-beta-next-btn {
+    flex: 1;
+    min-width: 0;
+  }
 }
 
 /* Make GitHub less “CTA-like” under the beta buttons */
