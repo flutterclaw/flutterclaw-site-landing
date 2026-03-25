@@ -51,52 +51,61 @@
     <section class="closed-beta" id="android-beta" aria-labelledby="android-beta-title">
       <div class="section-inner closed-beta-inner">
         <h2 class="section-title" id="android-beta-title">Android beta</h2>
-        <p class="section-lead closed-beta-lead">
-          Enter the Google account you use on Play Store. We’ll invite you to the beta when we can.
+        <p class="closed-beta-callout">
+          Two steps: register with the Google account you use on Play, wait until you’re approved as a tester, then complete the test opt-in in Google Play.
         </p>
-        <form class="closed-beta-form" id="closed-beta-form" novalidate>
-          <div class="closed-beta-field">
-            <label class="closed-beta-label" for="closed-beta-email">Google account email</label>
-            <input
-              class="closed-beta-input"
-              type="email"
-              id="closed-beta-email"
-              name="email"
-              autocomplete="email"
-              inputmode="email"
-              required
-              maxlength="320"
-              placeholder="you@gmail.com"
-              aria-describedby="closed-beta-privacy-hint closed-beta-status"
-            />
+        <p class="section-lead closed-beta-lead">
+          Closed testing on Google Play — we invite you when we can.
+        </p>
+        <div class="closed-beta-steps">
+          <div class="closed-beta-step">
+            <p class="closed-beta-step-heading"><span class="closed-beta-step-num">Step 1</span> Register</p>
+            <p class="closed-beta-step-desc">
+              Submit the same Google account you use in the Play Store. We’ll add you to the tester list when there’s capacity.
+            </p>
+            <form class="closed-beta-form" id="closed-beta-form" novalidate>
+              <div class="closed-beta-field">
+                <label class="closed-beta-label" for="closed-beta-email">Google account email</label>
+                <input
+                  class="closed-beta-input"
+                  type="email"
+                  id="closed-beta-email"
+                  name="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  required
+                  maxlength="320"
+                  placeholder="you@gmail.com"
+                  aria-describedby="closed-beta-privacy-hint closed-beta-status"
+                />
+              </div>
+              <label class="closed-beta-consent">
+                <input type="checkbox" id="closed-beta-consent" name="consent" required />
+                <span>I agree to the processing of my email as described in the <a href="/privacy">Privacy Policy</a>.</span>
+              </label>
+              <button type="submit" class="btn btn-primary closed-beta-submit" id="closed-beta-submit">
+                Register for Android beta
+              </button>
+              <p class="closed-beta-hint" id="closed-beta-privacy-hint">
+                No confirmation email from this page. After you’re approved, use Step 2 with the same Google account.
+              </p>
+              <p class="closed-beta-status" id="closed-beta-status" role="status" aria-live="polite" aria-atomic="true"></p>
+            </form>
           </div>
-          <label class="closed-beta-consent">
-            <input type="checkbox" id="closed-beta-consent" name="consent" required />
-            <span>I agree to the processing of my email as described in the <a href="/privacy">Privacy Policy</a>.</span>
-          </label>
-          <button type="submit" class="btn btn-primary closed-beta-submit" id="closed-beta-submit">
-            Register for Android beta
-          </button>
-          <p class="closed-beta-hint" id="closed-beta-privacy-hint">
-            No confirmation email from this page. After you’re on the tester list, use the same Google account with the buttons below.
-          </p>
-          <p class="closed-beta-status" id="closed-beta-status" role="status" aria-live="polite" aria-atomic="true"></p>
-        </form>
-        <div class="closed-beta-next-steps">
-          <p class="closed-beta-next-label">After you’re on the tester list</p>
-          <div class="closed-beta-next-buttons">
+          <div class="closed-beta-step closed-beta-step--highlight" aria-labelledby="closed-beta-step2-title">
+            <p class="closed-beta-step-heading" id="closed-beta-step2-title">
+              <span class="closed-beta-step-num">Step 2</span> Opt in on Google Play
+            </p>
+            <p class="closed-beta-step-desc">
+              Once you’re on the tester list, open the link below to accept the closed test and install or update the app.
+            </p>
             <a
-              class="btn btn-ghost closed-beta-next-btn"
-              href="https://play.google.com/store/apps/details?id=ai.flutterclaw.flutterclaw"
-              target="_blank"
-              rel="noopener"
-            >Open in Play Store</a>
-            <a
-              class="btn btn-ghost closed-beta-next-btn"
+              class="btn btn-primary closed-beta-optin-btn"
+              id="closed-beta-optin"
               href="https://play.google.com/apps/testing/ai.flutterclaw.flutterclaw"
               target="_blank"
               rel="noopener"
-            >Tester opt-in (web)</a>
+            >Join the test on Google Play</a>
           </div>
         </div>
       </div>
@@ -300,6 +309,30 @@ flutter run</code></pre>
           if (input) input.focus({ preventScroll: true });
         }, 450);
       });
+    })();
+  </script>
+  <script>
+    (function () {
+      var playStoreDetails = 'https://play.google.com/store/apps/details?id=ai.flutterclaw.flutterclaw';
+      var playTestingWeb = 'https://play.google.com/apps/testing/ai.flutterclaw.flutterclaw';
+      function applyOptinLink() {
+        var el = document.getElementById('closed-beta-optin');
+        if (!el) return;
+        var ua = navigator.userAgent || '';
+        var isAndroid = /Android/i.test(ua) && !/Windows Phone/i.test(ua);
+        if (isAndroid) {
+          el.href = playStoreDetails;
+          el.setAttribute('aria-label', 'Open FlutterClaw in Google Play Store to join the test');
+        } else {
+          el.href = playTestingWeb;
+          el.setAttribute('aria-label', 'Open Google Play tester opt-in page for FlutterClaw');
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyOptinLink);
+      } else {
+        applyOptinLink();
+      }
     })();
   </script>
 </body>

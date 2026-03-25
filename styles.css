@@ -279,10 +279,72 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
   text-align: center;
 }
 .closed-beta .section-title { margin-bottom: var(--space-sm); }
+.closed-beta-callout {
+  max-width: 40rem;
+  margin: 0 auto var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--text-small);
+  font-weight: 600;
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text);
+  background: rgba(255, 51, 102, 0.06);
+  border: 1px solid rgba(255, 51, 102, 0.22);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px var(--color-glow) inset;
+}
 .closed-beta-lead {
   max-width: 36rem;
-  margin: 0 auto var(--space-lg);
+  margin: 0 auto var(--space-xl);
   line-height: var(--line-height-relaxed);
+}
+.closed-beta-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  max-width: 28rem;
+  margin: 0 auto;
+  text-align: left;
+}
+.closed-beta-step {
+  margin: 0;
+}
+.closed-beta-step-heading {
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 var(--space-xs);
+  line-height: var(--line-height-relaxed);
+}
+.closed-beta-step-num {
+  display: inline-block;
+  margin-right: var(--space-xs);
+  font-size: var(--text-small);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.closed-beta-step-desc {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-md);
+}
+.closed-beta-step--highlight {
+  padding: var(--space-lg) var(--space-lg) var(--space-xl);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px var(--color-glow), 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+.closed-beta-step--highlight .closed-beta-step-desc {
+  margin-bottom: var(--space-lg);
+}
+.closed-beta-optin-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  font-weight: 600;
 }
 .closed-beta-form {
   max-width: 22rem;
@@ -361,44 +423,6 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 }
 .closed-beta-status--error {
   color: #fda4af;
-}
-
-.closed-beta-next-steps {
-  max-width: 22rem;
-  margin: var(--space-lg) auto 0;
-  padding: var(--space-md) var(--space-lg) var(--space-lg);
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-card-border);
-  border-radius: var(--radius);
-  text-align: center;
-}
-.closed-beta-next-label {
-  font-size: var(--text-small);
-  font-weight: 600;
-  color: var(--color-text-muted);
-  margin: 0 0 var(--space-md);
-  line-height: var(--line-height-relaxed);
-}
-.closed-beta-next-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  align-items: stretch;
-}
-.closed-beta-next-btn {
-  width: 100%;
-  justify-content: center;
-  text-align: center;
-}
-@media (min-width: 520px) {
-  .closed-beta-next-buttons {
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
-  .closed-beta-next-btn {
-    flex: 1;
-    min-width: 0;
-  }
 }
 
 /* Make GitHub less “CTA-like” under the beta buttons */
