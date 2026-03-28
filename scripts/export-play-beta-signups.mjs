@@ -1,6 +1,6 @@
 /**
  * Export Google Play closed-beta sign-ups from Firestore to a CSV for Play Console
- * (e.g. import testers). Collection: playClosedBetaSignups, field: email.
+ * (e.g. import testers). Collection: playClosedBetaSignups; fields: email, createdAt.
  *
  * Setup (one-time):
  * 1. Enable Firestore in the Firebase / Google Cloud project (flutterclaw-c226e).
@@ -16,8 +16,9 @@
  *   npm install
  *   npm run export-play-beta
  *
- * Output: play-closed-beta-emails.csv (header "Email", then unique addresses sorted).
- * If Play expects no header or a different column name, edit the file before import.
+ * Output: play-closed-beta-emails.csv — columns Email, CreatedAt (ISO 8601 UTC).
+ * Rows are sorted by CreatedAt (oldest first); legacy docs without createdAt sort last.
+ * For Play Console import (email only), use the first column or delete CreatedAt in a copy.
  */
 
 import admin from 'firebase-admin';
@@ -46,17 +47,39 @@ function csvEscape(cell) {
   return s;
 }
 
-const snap = await db.collection(COLLECTION).get();
-const emails = [
-  ...new Set(
-    snap.docs
-      .map((d) => d.data().email)
-      .filter((e) => typeof e === 'string' && e.includes('@'))
-  ),
-].sort((a, b) => a.localeCompare(b));
+function createdAtToIso(ts) {
+  if (ts && typeof ts.toDate === 'function') {
+    return ts.toDate().toISOString();
+  }
+  return '';
+}
 
-const lines = ['Email', ...emails.map(csvEscape)];
-const csv = lines.join('\n') + '\n';
+const snap = await db.collection(COLLECTION).get();
+const rows = snap.docs
+  .map((d) => {
+    const data = d.data();
+    const email = data.email;
+    if (typeof email !== 'string' || !email.includes('@')) return null;
+    const createdAt = data.createdAt;
+    const createdAtIso = createdAtToIso(createdAt);
+    const sortMs =
+      createdAt && typeof createdAt.toDate === 'function'
+        ? createdAt.toDate().getTime()
+        : Number.POSITIVE_INFINITY;
+    return { email, createdAtIso, sortMs };
+  })
+  .filter(Boolean);
+
+rows.sort((a, b) => {
+  if (a.sortMs !== b.sortMs) return a.sortMs - b.sortMs;
+  return a.email.localeCompare(b.email);
+});
+
+const header = ['Email', 'CreatedAt'].map(csvEscape).join(',');
+const body = rows.map((r) =>
+  [csvEscape(r.email), csvEscape(r.createdAtIso)].join(',')
+);
+const csv = [header, ...body].join('\n') + '\n';
 const outPath = resolve(process.cwd(), OUT_FILE);
 writeFileSync(outPath, csv, 'utf8');
-console.log(`Wrote ${emails.length} unique email(s) to ${outPath}`);
+console.log(`Wrote ${rows.length} row(s) to ${outPath}`);

@@ -267,7 +267,10 @@ flutter run</code></pre>
         submitBtn.disabled = true;
         try {
           var docRef = db.collection(collectionName).doc(normalized);
-          await docRef.set({ email: normalized });
+          await docRef.set({
+            email: normalized,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          });
           setStatus('Thanks — you’re on the list. We’ll use this email for the Android beta only, as described in our Privacy Policy.');
           form.reset();
         } catch (err) {

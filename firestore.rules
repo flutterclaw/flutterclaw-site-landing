@@ -5,7 +5,8 @@ service cloud.firestore {
     match /playClosedBetaSignups/{docId} {
       allow create: if !exists(/databases/$(database)/documents/playClosedBetaSignups/$(docId))
         && docId == request.resource.data.email
-        && request.resource.data.keys().hasOnly(['email'])
+        && request.resource.data.keys().hasOnly(['email', 'createdAt'])
+        && request.resource.data.createdAt == request.time
         && request.resource.data.email is string
         && request.resource.data.email.size() >= 5
         && request.resource.data.email.size() <= 320
